@@ -10,6 +10,7 @@
 #import "MasterViewController.h"
 #import "Post.h"
 #import "User.h"
+#import "PostViewController.h"
 
 @interface PostTableViewController ()
 
@@ -68,6 +69,16 @@
     cell.detailTextLabel.text = post.content;
     
     return cell;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([[segue identifier] isEqualToString:@"showPostDetails"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        PostViewController *next = (PostViewController*)segue.destinationViewController;
+        
+        Post *post = [self.posts objectAtIndex: indexPath.row];
+        next.post = post;
+    }
 }
 
 /*

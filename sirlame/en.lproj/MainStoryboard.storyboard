@@ -51,6 +51,9 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="XcF-jL-Eu0" kind="push" identifier="showPostDetails" id="Uay-gZ-NFO"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -65,13 +68,65 @@
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>
+        <!--Post View Controller-->
+        <scene sceneID="O8A-fF-Jau">
+            <objects>
+                <viewController id="XcF-jL-Eu0" customClass="PostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AEk-S1-WVV">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GpR-i0-vmx">
+                                <color key="backgroundColor" red="0.96334901147959184" green="0.96334901147959184" blue="0.96334901147959184" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="463" id="JiY-c1-WhA"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Posted by: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89u-dl-4tC">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="89u-dl-4tC" firstAttribute="leading" secondItem="AEk-S1-WVV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="8D7-he-LTL"/>
+                            <constraint firstItem="89u-dl-4tC" firstAttribute="top" secondItem="GpR-i0-vmx" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CET-rm-JYn"/>
+                            <constraint firstItem="GpR-i0-vmx" firstAttribute="top" secondItem="AEk-S1-WVV" secondAttribute="top" type="default" id="hh9-Fu-veR"/>
+                            <constraint firstItem="GpR-i0-vmx" firstAttribute="trailing" secondItem="AEk-S1-WVV" secondAttribute="trailing" type="default" id="loO-L4-y84"/>
+                            <constraint firstItem="GpR-i0-vmx" firstAttribute="leading" secondItem="AEk-S1-WVV" secondAttribute="leading" type="default" id="rs9-cU-DbM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tba-mt-Kqt"/>
+                    <connections>
+                        <outlet property="postContent" destination="GpR-i0-vmx" id="N2i-fg-52C"/>
+                        <outlet property="postedBy" destination="89u-dl-4tC" id="Y75-zt-bkt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o3i-xq-y0D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="959" y="64"/>
+        </scene>
     </scenes>
     <classes>
         <class className="MasterViewController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterViewController.h"/>
         </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
         <class className="PostTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PostTableViewController.h"/>
+        </class>
+        <class className="PostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PostViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="postContent" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="postedBy" candidateClass="UILabel"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

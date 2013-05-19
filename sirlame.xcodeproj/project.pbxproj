@@ -23,6 +23,7 @@
 		AADD8451174853F1009BB57E /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD8450174853F1009BB57E /* PostTableViewController.m */; };
 		AADD846317488E7F009BB57E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD846217488E7F009BB57E /* User.m */; };
 		AADD846617488E80009BB57E /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD846517488E80009BB57E /* Post.m */; };
+		AADD846B174927CB009BB57E /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADD846A174927CB009BB57E /* PostViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		AADD846217488E7F009BB57E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AADD846417488E80009BB57E /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		AADD846517488E80009BB57E /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		AADD8469174927CB009BB57E /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		AADD846A174927CB009BB57E /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				AADD844D17484A05009BB57E /* MasterViewController.m */,
 				AADD844F174853F1009BB57E /* PostTableViewController.h */,
 				AADD8450174853F1009BB57E /* PostTableViewController.m */,
+				AADD8469174927CB009BB57E /* PostViewController.h */,
+				AADD846A174927CB009BB57E /* PostViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				AADD8451174853F1009BB57E /* PostTableViewController.m in Sources */,
 				AADD846317488E7F009BB57E /* User.m in Sources */,
 				AADD846617488E80009BB57E /* Post.m in Sources */,
+				AADD846B174927CB009BB57E /* PostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
