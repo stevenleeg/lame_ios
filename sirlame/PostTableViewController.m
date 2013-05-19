@@ -35,6 +35,7 @@
     // Get the NSArray of posts
     MasterViewController *parent = (MasterViewController*)self.parentViewController;
     self.posts = parent.posts;
+    self.title = @"recent posts";
 }
 
 - (void)didReceiveMemoryWarning

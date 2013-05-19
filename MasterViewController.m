@@ -40,7 +40,6 @@
     
     NSError *error;
     self.posts = [self.managedObjectContext executeFetchRequest:request error:&error];
-    self.title = @"recent posts";
 }
 
 - (void)didReceiveMemoryWarning
