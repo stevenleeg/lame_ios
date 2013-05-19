@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CreatePostViewController.h"
 
-@interface PostTableViewController : UITableViewController
+@interface PostTableViewController : UITableViewController <CreatePostViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+-(IBAction)pressNew:(id)sender;
+-(void)savedPost;
 
 @end

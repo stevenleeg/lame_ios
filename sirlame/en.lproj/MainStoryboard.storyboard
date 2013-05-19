@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" title="sirlame" id="36">
                         <barButtonItem key="rightBarButtonItem" title="new post" id="VoZ-8g-BIJ">
                             <connections>
-                                <segue destination="Afs-cF-Gll" kind="modal" id="kVp-vB-QBS"/>
+                                <action selector="pressNew:" destination="12" id="ScJ-wy-WlE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -77,7 +77,7 @@
         <!--Create Post View Controller-->
         <scene sceneID="PSc-v6-nEN">
             <objects>
-                <viewController id="Afs-cF-Gll" customClass="CreatePostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createPost" id="Afs-cF-Gll" customClass="CreatePostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IgO-P7-nuQ">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -92,11 +92,6 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" returnKeyType="done"/>
                             </textView>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oBs-rZ-3NW"/>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="content:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnw-Q6-LJs">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Post anonymously" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qse-3p-3Jd">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -117,25 +112,40 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pressSave:" destination="Afs-cF-Gll" eventType="touchUpInside" id="WcD-Z4-Ioo"/>
+                                </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwa-uE-1Rh">
+                                <items>
+                                    <navigationItem title="new post" id="fiF-VI-oMS">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="svE-YR-Uzn">
+                                            <connections>
+                                                <action selector="pressCancel:" destination="Afs-cF-Gll" id="dLf-xm-VlP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xnw-Q6-LJs" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="4CY-r0-ICk"/>
                             <constraint firstItem="sTj-m6-G2z" firstAttribute="trailing" secondItem="IgO-P7-nuQ" secondAttribute="trailing" type="default" id="4qm-ou-HJD"/>
                             <constraint firstItem="n7K-PB-vL7" firstAttribute="centerY" secondItem="rRH-5n-0Su" secondAttribute="centerY" type="default" id="4wo-gJ-W9d"/>
+                            <constraint firstItem="oBs-rZ-3NW" firstAttribute="top" secondItem="IgO-P7-nuQ" secondAttribute="top" constant="267" id="7Op-JY-NfK"/>
+                            <constraint firstItem="qwa-uE-1Rh" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" type="default" id="Nhj-9B-C8h"/>
+                            <constraint firstItem="qwa-uE-1Rh" firstAttribute="trailing" secondItem="IgO-P7-nuQ" secondAttribute="trailing" type="default" id="RgR-PN-bal"/>
                             <constraint firstItem="qse-3p-3Jd" firstAttribute="centerY" secondItem="oBs-rZ-3NW" secondAttribute="centerY" type="default" id="TLf-Od-N00"/>
-                            <constraint firstItem="xnw-Q6-LJs" firstAttribute="top" secondItem="IgO-P7-nuQ" secondAttribute="top" constant="8" id="Vg8-cA-fQS"/>
                             <constraint firstAttribute="trailing" secondItem="oBs-rZ-3NW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="XO0-QB-aEt"/>
                             <constraint firstItem="sTj-m6-G2z" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" type="default" id="XUl-p4-qlc"/>
                             <constraint firstItem="rRH-5n-0Su" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Zrf-sz-fTI"/>
+                            <constraint firstItem="sTj-m6-G2z" firstAttribute="top" secondItem="qwa-uE-1Rh" secondAttribute="bottom" type="default" id="apS-MU-eJk"/>
                             <constraint firstAttribute="trailing" secondItem="n7K-PB-vL7" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="e2g-UG-Gf1"/>
+                            <constraint firstItem="qwa-uE-1Rh" firstAttribute="top" secondItem="IgO-P7-nuQ" secondAttribute="top" type="default" id="ein-3f-GUL"/>
                             <constraint firstItem="R75-YY-3u1" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="eox-vc-teD"/>
-                            <constraint firstItem="oBs-rZ-3NW" firstAttribute="top" secondItem="IgO-P7-nuQ" secondAttribute="top" constant="260" id="kZ6-A0-Dh7"/>
                             <constraint firstAttribute="trailing" secondItem="R75-YY-3u1" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="l2q-qW-RQl"/>
                             <constraint firstAttribute="bottom" secondItem="R75-YY-3u1" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lLO-y4-Z4c"/>
-                            <constraint firstItem="sTj-m6-G2z" firstAttribute="top" secondItem="xnw-Q6-LJs" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="rhG-NV-anT"/>
-                            <constraint firstAttribute="bottom" secondItem="n7K-PB-vL7" secondAttribute="bottom" constant="229" id="uOa-pg-Cri"/>
+                            <constraint firstAttribute="bottom" secondItem="n7K-PB-vL7" secondAttribute="bottom" constant="222" id="r6X-zL-fFz"/>
                             <constraint firstItem="qse-3p-3Jd" firstAttribute="leading" secondItem="IgO-P7-nuQ" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xpC-Sv-0bg"/>
                         </constraints>
                     </view>
@@ -194,6 +204,8 @@
         <class className="CreatePostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CreatePostViewController.h"/>
             <relationships>
+                <relationship kind="action" name="pressCancel:"/>
+                <relationship kind="action" name="pressSave:"/>
                 <relationship kind="outlet" name="postContent" candidateClass="UITextView"/>
             </relationships>
         </class>
@@ -205,6 +217,9 @@
         </class>
         <class className="PostTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PostTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pressNew:"/>
+            </relationships>
         </class>
         <class className="PostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PostViewController.h"/>

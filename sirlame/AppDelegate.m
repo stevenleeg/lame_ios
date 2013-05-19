@@ -24,8 +24,30 @@
     MasterViewController *navigationController = (MasterViewController *)self.window.rootViewController;
     navigationController.managedObjectContext = self.managedObjectContext;
     
-    // Test out Core Data
     NSManagedObjectContext *context = self.managedObjectContext;
+    
+    // Let's try to fetch a current user
+    NSFetchRequest *fetchUser = [[NSFetchRequest alloc] init];
+    NSEntityDescription *user = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+    
+    [fetchUser setEntity:user];
+    [fetchUser setFetchLimit: 1];
+    
+    NSError *error;
+    NSArray *fetched = [self.managedObjectContext executeFetchRequest:fetchUser error:&error];
+    
+    if([fetched count] == 1) {
+        self.currentUser = [fetched objectAtIndex:0];
+    } else {
+        NSLog(@"Creating user steve");
+        User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+        user.name = @"steve";
+        user.id = [NSNumber numberWithInt: 1];
+        
+        [self.managedObjectContext save:&error];
+        
+        self.currentUser = user;
+    }
     
     /*
     // Create a user
@@ -49,8 +71,6 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *thePost = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:context];
     [request setEntity: thePost];
-    
-    NSError *error;
     
     NSArray *fetchedObjects = [context executeFetchRequest:request error:&error];
     for(Post *post in fetchedObjects) {

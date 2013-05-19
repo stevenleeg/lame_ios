@@ -7,6 +7,7 @@
 //
 
 #import "PostViewController.h"
+#import "CreatePostViewController.h"
 #import "Post.h"
 #import "User.h"
 

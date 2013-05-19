@@ -7,6 +7,9 @@
 //
 
 #import "CreatePostViewController.h"
+#import "AppDelegate.h"
+#import "Post.h"
+#import "User.h"
 
 @interface CreatePostViewController ()
 
@@ -15,19 +18,25 @@
 @implementation CreatePostViewController
 
 @synthesize postContent;
+@synthesize managedObjectContext;
+@synthesize currentUser;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = delegate.managedObjectContext;
+    self.currentUser = delegate.currentUser;
+    
     [self.postContent setDelegate: self];
 }
 
@@ -47,6 +56,29 @@
     }
     
     return YES;
+}
+
+-(IBAction)pressCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion: nil];
+}
+
+-(IBAction)pressSave:(id)sender {
+    Post *post = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:self.managedObjectContext];
+    post.content = [self.postContent text];
+    post.author = self.currentUser;
+    post.id = [NSNumber numberWithInt:1];
+    
+    NSError *error;
+    if(![self.managedObjectContext save:&error]) {
+        NSLog(@"Error while saving post to local db: %@", [error localizedDescription]);
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self.delegate savedPost];
 }
 
 - (void)didReceiveMemoryWarning
