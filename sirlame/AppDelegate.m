@@ -25,10 +25,10 @@
     MasterViewController *navigationController = (MasterViewController *)self.window.rootViewController;
     navigationController.managedObjectContext = self.managedObjectContext;
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *userSID = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentUserSID"];
     
     // Get the current user (this could be nil!)
-    self.currentUser = [prefs objectForKey:@"currentUser"];
+    self.currentUser = [[self.managedObjectContext fetchObjectsForEntityName:@"User" withPredicate:@"sid == %@", userSID] anyObject];
     
     return YES;
 }

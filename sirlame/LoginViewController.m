@@ -42,6 +42,10 @@
             AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
             delegate.currentUser = user;
             
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            [prefs setObject:user.sid forKey:@"currentUserSID"];
+            [prefs synchronize];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else {
