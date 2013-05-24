@@ -16,4 +16,9 @@
 @dynamic id;
 @dynamic author;
 
+-(void)syncToServer
+{
+    NSLog(@"One of these days...");
+}
+
 @end

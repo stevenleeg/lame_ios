@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B7BEB9F0FD041A4A43058F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB259E542B2473F8DF623F8 /* libPods.a */; };
+		AA5EE732174D3684002F4636 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5EE731174D3684002F4636 /* LoginViewController.m */; };
 		AADD8422174849A7009BB57E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADD8421174849A7009BB57E /* UIKit.framework */; };
 		AADD8424174849A7009BB57E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADD8423174849A7009BB57E /* Foundation.framework */; };
 		AADD8426174849A7009BB57E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADD8425174849A7009BB57E /* CoreGraphics.framework */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA5EE730174D3684002F4636 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		AA5EE731174D3684002F4636 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AADD841E174849A7009BB57E /* sirlame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sirlame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADD8421174849A7009BB57E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AADD8423174849A7009BB57E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,6 +60,8 @@
 		AADD846A174927CB009BB57E /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AADD846C174962E8009BB57E /* CreatePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePostViewController.h; sourceTree = "<group>"; };
 		AADD846D174962E8009BB57E /* CreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
+		ACA460BB19F3404F8AD7FF40 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AFB259E542B2473F8DF623F8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,7 @@
 				AADD8424174849A7009BB57E /* Foundation.framework in Frameworks */,
 				AADD8426174849A7009BB57E /* CoreGraphics.framework in Frameworks */,
 				AADD8428174849A7009BB57E /* CoreData.framework in Frameworks */,
+				1B7BEB9F0FD041A4A43058F9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +86,7 @@
 				AADD8429174849A7009BB57E /* sirlame */,
 				AADD8420174849A7009BB57E /* Frameworks */,
 				AADD841F174849A7009BB57E /* Products */,
+				ACA460BB19F3404F8AD7FF40 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +105,7 @@
 				AADD8423174849A7009BB57E /* Foundation.framework */,
 				AADD8425174849A7009BB57E /* CoreGraphics.framework */,
 				AADD8427174849A7009BB57E /* CoreData.framework */,
+				AFB259E542B2473F8DF623F8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,6 +160,8 @@
 				AADD846A174927CB009BB57E /* PostViewController.m */,
 				AADD846C174962E8009BB57E /* CreatePostViewController.h */,
 				AADD846D174962E8009BB57E /* CreatePostViewController.m */,
+				AA5EE730174D3684002F4636 /* LoginViewController.h */,
+				AA5EE731174D3684002F4636 /* LoginViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -162,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AADD8449174849A7009BB57E /* Build configuration list for PBXNativeTarget "sirlame" */;
 			buildPhases = (
+				9DBF5846640047A183D6E5D0 /* Check Pods Manifest.lock */,
 				AADD841A174849A7009BB57E /* Sources */,
 				AADD841B174849A7009BB57E /* Frameworks */,
 				AADD841C174849A7009BB57E /* Resources */,
+				B2CA95361D8442A0B60531D2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -216,6 +229,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9DBF5846640047A183D6E5D0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+		B2CA95361D8442A0B60531D2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AADD841A174849A7009BB57E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -230,6 +274,7 @@
 				AADD846617488E80009BB57E /* Post.m in Sources */,
 				AADD846B174927CB009BB57E /* PostViewController.m in Sources */,
 				AADD846E174962E8009BB57E /* CreatePostViewController.m in Sources */,
+				AA5EE732174D3684002F4636 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +358,7 @@
 		};
 		AADD844A174849A7009BB57E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACA460BB19F3404F8AD7FF40 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sirlame/sirlame-Prefix.pch";
@@ -324,6 +370,7 @@
 		};
 		AADD844B174849A7009BB57E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACA460BB19F3404F8AD7FF40 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sirlame/sirlame-Prefix.pch";
@@ -352,6 +399,7 @@
 				AADD844B174849A7009BB57E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

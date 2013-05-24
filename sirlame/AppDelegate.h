@@ -23,3 +23,10 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 @end
+
+// We're also going to do a little bit of magic
+@interface NSManagedObjectContext (Utilities)
+
+-(NSSet*)fetchObjectsForEntityName:(NSString*)newEntityName withPredicate:(id)stringOrPredicate, ...;
+
+@end

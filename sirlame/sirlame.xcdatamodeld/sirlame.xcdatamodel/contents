@@ -2,16 +2,17 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="content" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 16" indexed="YES" syncable="YES"/>
-        <relationship name="author" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="posts" inverseEntity="User" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" indexed="YES" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="posts" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="id" attributeType="Integer 16" indexed="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="sid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="author" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Post" positionX="90" positionY="-1350" width="128" height="88"/>
-        <element name="User" positionX="-90" positionY="-1350" width="128" height="88"/>
+        <element name="Post" positionX="99" positionY="-1339" width="128" height="88"/>
+        <element name="User" positionX="-90" positionY="-1350" width="128" height="103"/>
     </elements>
 </model>

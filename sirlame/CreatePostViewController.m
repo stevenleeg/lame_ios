@@ -7,6 +7,7 @@
 //
 
 #import "CreatePostViewController.h"
+#import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "Post.h"
 #import "User.h"
@@ -19,7 +20,9 @@
 
 @synthesize postContent;
 @synthesize managedObjectContext;
-@synthesize currentUser;
+@synthesize appDelegate;
+@synthesize delegate;
+@synthesize postAnon;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,9 +36,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    self.managedObjectContext = delegate.managedObjectContext;
-    self.currentUser = delegate.currentUser;
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = self.appDelegate.managedObjectContext;
     
     [self.postContent setDelegate: self];
 }
@@ -58,6 +60,14 @@
     return YES;
 }
 
+-(IBAction)changeAnonymousSwitch:(UISwitch*)sender
+{
+    if(!sender.isOn && self.appDelegate.currentUser == nil) {
+        LoginViewController *loginView = (LoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+        [self presentViewController:loginView animated:YES completion:nil];
+    }
+}
+
 -(IBAction)pressCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion: nil];
 }
@@ -65,13 +75,20 @@
 -(IBAction)pressSave:(id)sender {
     Post *post = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:self.managedObjectContext];
     post.content = [self.postContent text];
-    post.author = self.currentUser;
+    
+    if([self.postAnon isOn]) {
+        post.author = nil;
+    } else {
+        post.author = self.appDelegate.currentUser;
+    }
     post.id = [NSNumber numberWithInt:1];
     
     NSError *error;
     if(![self.managedObjectContext save:&error]) {
         NSLog(@"Error while saving post to local db: %@", [error localizedDescription]);
     }
+    
+    [post syncToServer];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import <objc/runtime.h>
 #import "MasterViewController.h"
 #import "Post.h"
 #import "User.h"
@@ -24,59 +25,10 @@
     MasterViewController *navigationController = (MasterViewController *)self.window.rootViewController;
     navigationController.managedObjectContext = self.managedObjectContext;
     
-    NSManagedObjectContext *context = self.managedObjectContext;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    // Let's try to fetch a current user
-    NSFetchRequest *fetchUser = [[NSFetchRequest alloc] init];
-    NSEntityDescription *user = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-    
-    [fetchUser setEntity:user];
-    [fetchUser setFetchLimit: 1];
-    
-    NSError *error;
-    NSArray *fetched = [self.managedObjectContext executeFetchRequest:fetchUser error:&error];
-    
-    if([fetched count] == 1) {
-        self.currentUser = [fetched objectAtIndex:0];
-    } else {
-        NSLog(@"Creating user steve");
-        User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-        user.name = @"steve";
-        user.id = [NSNumber numberWithInt: 1];
-        
-        [self.managedObjectContext save:&error];
-        
-        self.currentUser = user;
-    }
-    
-    /*
-    // Create a user
-    NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-    [user setValue:@"steve" forKey:@"name"];
-    [user setValue:[NSNumber numberWithInt:1] forKey:@"id"];
-    
-    // And a post
-    NSManagedObject *post = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:context];
-    [post setValue:[NSNumber numberWithInt:1] forKey:@"id"];
-    [post setValue:@"Hello world" forKey:@"content"];
-    [post setValue:user forKey:@"author"];
-    
-    NSError *error;
-    
-    if(![context save:&error])
-        NSLog(@"Something went wrong... %@", [error localizedDescription]);
-    */
-    
-    NSLog(@"--- Fetching ---");
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *thePost = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:context];
-    [request setEntity: thePost];
-    
-    NSArray *fetchedObjects = [context executeFetchRequest:request error:&error];
-    for(Post *post in fetchedObjects) {
-        NSLog(@"Content: %@", post.content);
-        NSLog(@"By: %@", post.author.name);
-    }
+    // Get the current user (this could be nil!)
+    self.currentUser = [prefs objectForKey:@"currentUser"];
     
     return YES;
 }
@@ -202,6 +154,43 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+@end
+
+/*
+ * Taken from http://www.cocoawithlove.com/2008/03/core-data-one-line-fetch.html
+ */
+@implementation NSManagedObjectContext (Utilities)
+
+-(NSSet *)fetchObjectsForEntityName:(NSString *)newEntityName withPredicate:(id)stringOrPredicate, ...
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:newEntityName inManagedObjectContext:self];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = entity;
+    
+    if(stringOrPredicate) {
+        NSPredicate *predicate;
+        if([stringOrPredicate isKindOfClass:[NSString class]]) {
+            va_list variadicArguments;
+            va_start(variadicArguments, stringOrPredicate);
+            predicate = [NSPredicate predicateWithFormat:stringOrPredicate arguments:variadicArguments];
+            va_end(variadicArguments);
+        }
+        else {
+            NSAssert2([stringOrPredicate isKindOfClass:[NSPredicate class]], @"Second parameter passwed to %s is of unexpected class", sel_getName(_cmd), class_getName([stringOrPredicate class]));
+            predicate = (NSPredicate*)stringOrPredicate;
+        }
+        [request setPredicate:predicate];
+    }
+    
+    NSError *error;
+    NSArray *results = [self executeFetchRequest:request error:&error];
+    if(error != nil) {
+        [NSException raise:NSGenericException format:@"%@", [error localizedDescription]];
+    }
+    
+    return [NSSet setWithArray: results];
 }
 
 @end

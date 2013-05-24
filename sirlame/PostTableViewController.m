@@ -75,7 +75,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     Post *post = [self.posts objectAtIndex:indexPath.row];
-    cell.textLabel.text = post.author.name;
+    if(post.author != nil) {
+        cell.textLabel.text = post.author.name;
+    }
+    else {
+        cell.textLabel.text = @"anonymous";
+    }
     cell.detailTextLabel.text = post.content;
     
     return cell;
