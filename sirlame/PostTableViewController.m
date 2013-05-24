@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "User.h"
 #import "PostViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface PostTableViewController ()
 
@@ -38,7 +39,19 @@
     MasterViewController *parent = (MasterViewController*)self.parentViewController;
     self.managedObjectContext = parent.managedObjectContext;
     self.title = @"recent posts";
-    [self loadPosts];
+    
+    // Try to load posts
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    [Post loadNewPostsWithCompletionHandler:^(NSError *error) {
+        if(error != nil) {
+            NSLog(@"Error loading posts");
+            return;
+        }
+        
+        [hud hide:YES];
+        [self loadPosts];
+    }];
 }
 
 -(void)loadPosts
@@ -49,6 +62,7 @@
     request.entity = postDesc;
     NSError *error;
     self.posts = [self.managedObjectContext executeFetchRequest:request error:&error];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

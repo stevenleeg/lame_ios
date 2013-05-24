@@ -12,6 +12,7 @@
 @class User;
 
 typedef void (^PostSaveCompletionHandler)(NSError*);
+typedef void (^PostLoadedCompletionHandler)(NSError*);
 
 @interface Post : NSManagedObject
 
@@ -20,5 +21,6 @@ typedef void (^PostSaveCompletionHandler)(NSError*);
 @property (nonatomic, retain) User *author;
 
 -(void)syncToServerWithCompletionHandler:(PostSaveCompletionHandler)onCompletion;
++(void)loadNewPostsWithCompletionHandler:(PostLoadedCompletionHandler)onCompletion;
 
 @end
