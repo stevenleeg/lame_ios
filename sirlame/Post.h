@@ -11,12 +11,14 @@
 
 @class User;
 
+typedef void (^PostSaveCompletionHandler)(NSError*);
+
 @interface Post : NSManagedObject
 
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) User *author;
 
--(void)syncToServer;
+-(void)syncToServerWithCompletionHandler:(PostSaveCompletionHandler)onCompletion;
 
 @end

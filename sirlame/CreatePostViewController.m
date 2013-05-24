@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Post.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface CreatePostViewController ()
 
@@ -86,16 +87,27 @@
     } else {
         post.author = self.appDelegate.currentUser;
     }
-    post.id = [NSNumber numberWithInt:1];
     
-    NSError *error;
-    if(![self.managedObjectContext save:&error]) {
-        NSLog(@"Error while saving post to local db: %@", [error localizedDescription]);
-    }
-    
-    [post syncToServer];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [post syncToServerWithCompletionHandler:^(NSError *error) {
+        if(error != nil) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"Error while saving";
+            [hud hide:YES afterDelay:1.75];
+            return;
+        }
+        
+        if(![self.managedObjectContext save:&error]) {
+            NSLog(@"Error while saving post to local db: %@", [error localizedDescription]);
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"Error while saving to local db";
+            [hud hide:YES afterDelay:1.75];
+            return;
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
