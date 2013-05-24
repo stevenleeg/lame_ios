@@ -14,6 +14,7 @@
 @protocol CreatePostViewControllerDelegate
 
 -(void)savedPost;
+-(void)cancelledPost;
 
 @end
 

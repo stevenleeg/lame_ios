@@ -28,7 +28,12 @@
     NSString *userSID = [[NSUserDefaults standardUserDefaults] stringForKey:@"currentUserSID"];
     
     // Get the current user (this could be nil!)
-    self.currentUser = [[self.managedObjectContext fetchObjectsForEntityName:@"User" withPredicate:@"sid == %@", userSID] anyObject];
+    if(userSID != nil) {
+        self.currentUser = [[self.managedObjectContext fetchObjectsForEntityName:@"User" withPredicate:@"sid == %@", userSID] anyObject];
+    }
+    else {
+        self.currentUser = nil;
+    }
     
     return YES;
 }

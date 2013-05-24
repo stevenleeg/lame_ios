@@ -7,7 +7,7 @@
 //
 
 #import "PostTableViewController.h"
-#import "MasterViewController.h"
+#import "AppDelegate.h"
 #import "Post.h"
 #import "User.h"
 #import "PostViewController.h"
@@ -21,6 +21,8 @@
 
 @synthesize posts;
 @synthesize managedObjectContext;
+@synthesize logoutButton;
+@synthesize navBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,9 +37,12 @@
 {
     [super viewDidLoad];
     
-    // Get the NSArray of posts
-    MasterViewController *parent = (MasterViewController*)self.parentViewController;
-    self.managedObjectContext = parent.managedObjectContext;
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = delegate.managedObjectContext;
+    
+    // Change some elements around
+    [self checkLogoutAnimated: NO];
+    
     self.title = @"recent posts";
     
     // Try to load posts
@@ -127,13 +132,54 @@
 -(void)savedPost
 {
     [self loadPosts];
+    [self checkLogout];
     [self.tableView reloadData];
+}
+
+-(void)cancelledPost
+{
+    [self checkLogout];
 }
 
 -(IBAction)pressNew:(id)sender {
     CreatePostViewController *createView = (CreatePostViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"createPost"];
     createView.delegate = self;
     [self presentViewController:createView animated:YES completion:nil];
+}
+
+-(void)checkLogoutAnimated:(BOOL)animated
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSMutableArray *navBarItems = [[self.navBar leftBarButtonItems] mutableCopy];
+    if(delegate.currentUser == nil) {
+        [navBarItems removeObject:self.logoutButton];
+    } else if(![navBarItems containsObject:self.logoutButton]) {
+        [navBarItems addObject:self.logoutButton];
+    }
+    [self.navBar setLeftBarButtonItems:navBarItems animated:animated];
+}
+
+-(void)checkLogout
+{
+    [self checkLogoutAnimated:YES];
+}
+
+-(IBAction)pressLogout:(id)sender
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    delegate.currentUser = nil;
+    
+    // Remove the SID from defaults
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs removeObjectForKey:@"currentUserSID"];
+    [prefs synchronize];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.customView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"37x-Checkmark.png"]];
+    [hud hide:YES afterDelay:1.75];
+    
+    [self checkLogout];
 }
 
 @end

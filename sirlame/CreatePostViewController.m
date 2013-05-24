@@ -75,6 +75,7 @@
 }
 
 -(IBAction)pressCancel:(id)sender {
+    [self.delegate cancelledPost];
     [self dismissViewControllerAnimated:YES completion: nil];
 }
 

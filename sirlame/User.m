@@ -52,14 +52,15 @@
                 NSLog(@"Creating new user");
                 user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:delegate.managedObjectContext];
                 user.name = username;
-                user.sid = [userData objectForKey:@"sid"];
-                
-                [delegate.managedObjectContext save:&error];
-                delegate.currentUser = user;
+                user.id = [userData objectForKey:@"id"];
             }
             else {
                 NSLog(@"Logged in with user %@", user.name);
             }
+        
+            user.sid = [userData objectForKey:@"sid"];
+            delegate.currentUser = user;
+            [delegate.managedObjectContext save:&error];
             
             dispatch_async(dispatch_get_main_queue(), ^() {
                 onFinish(user);

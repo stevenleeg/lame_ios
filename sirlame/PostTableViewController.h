@@ -13,8 +13,12 @@
 
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
 
 -(IBAction)pressNew:(id)sender;
--(void)savedPost;
+-(IBAction)pressLogout:(id)sender;
+-(void)checkLogout;
+-(void)checkLogoutAnimated:(BOOL)animated;
 
 @end

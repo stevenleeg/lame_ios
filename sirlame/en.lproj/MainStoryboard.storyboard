@@ -142,12 +142,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="sirlame" id="36">
+                        <barButtonItem key="leftBarButtonItem" title="logout" id="TAS-mg-NbH">
+                            <connections>
+                                <action selector="pressLogout:" destination="12" id="XBK-9g-MDy"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="new post" id="VoZ-8g-BIJ">
                             <connections>
                                 <action selector="pressNew:" destination="12" id="ScJ-wy-WlE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="logoutButton" destination="TAS-mg-NbH" id="Fbn-w4-TdA"/>
+                        <outlet property="navBar" destination="36" id="Lc7-tX-DG2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,7 +321,10 @@
         <class className="PostTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PostTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="pressLogout:"/>
                 <relationship kind="action" name="pressNew:"/>
+                <relationship kind="outlet" name="logoutButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationItem"/>
             </relationships>
         </class>
         <class className="PostViewController" superclassName="UIViewController">
