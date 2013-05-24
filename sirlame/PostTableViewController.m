@@ -56,7 +56,10 @@
 
 -(void)loadPosts
 {
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+    NSArray *sorters = [[NSArray alloc] initWithObjects:sort, nil];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setSortDescriptors:sorters];
     NSEntityDescription *postDesc = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:self.managedObjectContext];
     
     request.entity = postDesc;
