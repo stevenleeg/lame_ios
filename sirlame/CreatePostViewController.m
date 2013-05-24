@@ -40,6 +40,11 @@
     self.managedObjectContext = self.appDelegate.managedObjectContext;
     
     [self.postContent setDelegate: self];
+    
+    // Check to see if we should be posting anonymously
+    if(self.appDelegate.currentUser != nil) {
+        [self.postAnon setOn:NO];
+    }
 }
 
 -(BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
