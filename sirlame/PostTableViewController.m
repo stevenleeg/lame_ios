@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "User.h"
 #import "PostViewController.h"
+#import "SLColors.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 @interface PostTableViewController ()
@@ -40,8 +41,9 @@
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = delegate.managedObjectContext;
     
-    // Change some elements around
+    // UI customization
     [self checkLogoutAnimated: NO];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.title = @"recent posts";
     
@@ -88,15 +90,28 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [posts count];
+    return [posts count] * 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *NormalCellIdentifier = @"Cell";
+    static NSString *SpacingCellIdentifier = @"SpacingCell";
+    UITableViewCell *cell;
     
-    Post *post = [self.posts objectAtIndex:indexPath.row];
+    if(indexPath.row % 2 == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:SpacingCellIdentifier forIndexPath:indexPath];
+        CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
+        UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
+        backgroundView.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = backgroundView;
+        
+        return cell;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:NormalCellIdentifier forIndexPath:indexPath];
+    }
+    
+    Post *post = [self.posts objectAtIndex:indexPath.row / 2];
     if(post.author != nil) {
         cell.textLabel.text = post.author.name;
     }
@@ -105,7 +120,21 @@
     }
     cell.detailTextLabel.text = post.content;
     
+    // Do some styling
+    CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
+    backgroundView.backgroundColor = [SLColors white];
+    cell.backgroundView = backgroundView;
+    
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row % 2 == 1)
+        return 15;
+    else
+        return 100;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -113,7 +142,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         PostViewController *next = (PostViewController*)segue.destinationViewController;
         
-        Post *post = [self.posts objectAtIndex: indexPath.row];
+        Post *post = [self.posts objectAtIndex: indexPath.row / 2];
         next.post = post;
     }
 }

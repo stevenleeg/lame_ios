@@ -10,6 +10,7 @@
 		1B7BEB9F0FD041A4A43058F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB259E542B2473F8DF623F8 /* libPods.a */; };
 		AA41AB5E175012420032DBD3 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = AA41AB5D175012420032DBD3 /* 37x-Checkmark.png */; };
 		AA41AB60175012460032DBD3 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA41AB5F175012460032DBD3 /* 37x-Checkmark@2x.png */; };
+		AA41AB651750337B0032DBD3 /* SLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AA41AB641750337B0032DBD3 /* SLColors.m */; };
 		AA5EE732174D3684002F4636 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5EE731174D3684002F4636 /* LoginViewController.m */; };
 		AADD8422174849A7009BB57E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADD8421174849A7009BB57E /* UIKit.framework */; };
 		AADD8424174849A7009BB57E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADD8423174849A7009BB57E /* Foundation.framework */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		AA41AB5D175012420032DBD3 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		AA41AB5F175012460032DBD3 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		AA41AB631750337B0032DBD3 /* SLColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLColors.h; sourceTree = "<group>"; };
+		AA41AB641750337B0032DBD3 /* SLColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLColors.m; sourceTree = "<group>"; };
 		AA5EE730174D3684002F4636 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AA5EE731174D3684002F4636 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AADD841E174849A7009BB57E /* sirlame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sirlame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +96,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		AA41AB62175033490032DBD3 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				AA41AB631750337B0032DBD3 /* SLColors.h */,
+				AA41AB641750337B0032DBD3 /* SLColors.m */,
+			);
+			name = "UI Elements";
+			sourceTree = "<group>";
+		};
 		AADD8415174849A7009BB57E = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +142,7 @@
 				AADD842A174849A7009BB57E /* Supporting Files */,
 				AADD846717488E99009BB57E /* Models */,
 				AADD846817488F8C009BB57E /* View Controllers */,
+				AA41AB62175033490032DBD3 /* UI Elements */,
 				AADD8432174849A7009BB57E /* AppDelegate.h */,
 				AADD8433174849A7009BB57E /* AppDelegate.m */,
 				AADD843B174849A7009BB57E /* MainStoryboard.storyboard */,
@@ -291,6 +304,7 @@
 				AADD846B174927CB009BB57E /* PostViewController.m in Sources */,
 				AADD846E174962E8009BB57E /* CreatePostViewController.m in Sources */,
 				AA5EE732174D3684002F4636 /* LoginViewController.m in Sources */,
+				AA41AB651750337B0032DBD3 /* SLColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
