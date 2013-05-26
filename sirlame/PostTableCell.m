@@ -7,6 +7,8 @@
 //
 
 #import "PostTableCell.h"
+#import "SLColors.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PostTableCell
 @synthesize postContent;
@@ -16,7 +18,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
     }
     return self;
 }

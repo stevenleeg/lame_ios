@@ -12,5 +12,6 @@
 
 +(UIColor*)background;
 +(UIColor*)white;
++(UIColor*)tan;
 
 @end

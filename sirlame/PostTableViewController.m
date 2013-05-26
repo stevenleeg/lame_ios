@@ -103,7 +103,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpacingCellIdentifier forIndexPath:indexPath];
         CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
         UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
-        backgroundView.backgroundColor = [UIColor clearColor];
+        backgroundView.backgroundColor = [SLColors background];
         cell.backgroundView = backgroundView;
         
         return cell;
@@ -124,7 +124,7 @@
     // Do some styling
     CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
     UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
-    backgroundView.backgroundColor = [SLColors background];
+    backgroundView.backgroundColor = [SLColors white];
     cell.backgroundView = backgroundView;
     
     return cell;
