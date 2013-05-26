@@ -11,6 +11,8 @@
 #import "Post.h"
 #import "User.h"
 #import "PostViewController.h"
+#import "SLColors.h"
+#import "PostTableCell.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 @interface PostTableViewController ()
@@ -40,8 +42,9 @@
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = delegate.managedObjectContext;
     
-    // Change some elements around
+    // UI customization
     [self checkLogoutAnimated: NO];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.title = @"recent posts";
     
@@ -88,24 +91,56 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [posts count];
+    return [posts count] * 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *NormalCellIdentifier = @"Cell";
+    static NSString *SpacingCellIdentifier = @"SpacingCell";
     
-    Post *post = [self.posts objectAtIndex:indexPath.row];
+    if(indexPath.row % 2 == 1) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpacingCellIdentifier forIndexPath:indexPath];
+        CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
+        UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
+        backgroundView.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = backgroundView;
+        
+        return cell;
+    }
+    
+    PostTableCell *cell = [tableView dequeueReusableCellWithIdentifier:NormalCellIdentifier forIndexPath:indexPath];
+    
+    Post *post = [self.posts objectAtIndex:indexPath.row / 2];
     if(post.author != nil) {
-        cell.textLabel.text = post.author.name;
+        [cell setAuthor:post.author.name];
     }
     else {
-        cell.textLabel.text = @"anonymous";
+        [cell setAuthor:@"anonymous"];
     }
-    cell.detailTextLabel.text = post.content;
+    [cell setContent:post.content];
+    cell.postContent.scrollEnabled = NO;
+    
+    // Do some styling
+    CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
+    backgroundView.backgroundColor = [SLColors background];
+    cell.backgroundView = backgroundView;
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // This is the padding row
+    if(indexPath.row % 2 == 1) {
+        return 10;
+    }
+    
+    // Otherwise, let's size it relative to the content of the textView
+    Post *post = [self.posts objectAtIndex:indexPath.row / 2];
+    CGSize size = [post.content sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.tableView.frame.size.width - 20, 1000.0)];
+    return size.height + 32;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -113,7 +148,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         PostViewController *next = (PostViewController*)segue.destinationViewController;
         
-        Post *post = [self.posts objectAtIndex: indexPath.row];
+        Post *post = [self.posts objectAtIndex: indexPath.row / 2];
         next.post = post;
     }
 }
