@@ -35,7 +35,7 @@
 
 -(void)setAuthor:(NSString *)author
 {
-    self.postedBy.text = [NSString stringWithFormat:@"Posted by %@", author];
+    self.postedBy.text = [NSString stringWithFormat:@"posted by %@", author];
 }
 
 -(void)layoutSubviews
