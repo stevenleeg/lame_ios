@@ -4,3 +4,9 @@ body {
     margin: 0px;
     padding: 0px 8px 0px 8px;
 }
+
+a {
+    color: #424B5C;
+    font-weight: bold;
+    text-decoration: none;
+}

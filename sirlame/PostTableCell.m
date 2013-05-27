@@ -32,6 +32,11 @@
 
 -(void)setContent:(NSString*)content
 {
+    // Parse the content for @replies
+    NSError *error;
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@"@([0-9]*)" options:NSRegularExpressionCaseInsensitive error:&error];
+    content = [regex stringByReplacingMatchesInString:content options:0 range:NSMakeRange(0, [content length]) withTemplate:@"<a href=\"#\">@$1</a>"];
+    
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
     
