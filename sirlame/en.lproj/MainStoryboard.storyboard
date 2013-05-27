@@ -118,10 +118,9 @@
                                 <connections>
                                     <outlet property="postContent" destination="1eS-b6-BhC" id="oKP-dZ-K8R"/>
                                     <outlet property="postedBy" destination="MU2-xD-Uht" id="bPG-5a-sAK"/>
-                                    <segue destination="XcF-jL-Eu0" kind="push" identifier="showPostDetails" id="Uay-gZ-NFO"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpacingCell" id="sMm-fB-BA3">
+                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpacingCell" id="sMm-fB-BA3">
                                 <rect key="frame" x="0.0" y="147" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -229,18 +228,18 @@
             <objects>
                 <viewController id="XcF-jL-Eu0" customClass="PostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEk-S1-WVV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="GpR-i0-vmx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="463"/>
+                                <rect key="frame" x="0.0" y="85" width="320" height="463"/>
                                 <color key="backgroundColor" red="0.96334901147959184" green="0.96334901147959184" blue="0.96334901147959184" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Posted by: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="89u-dl-4tC">
-                                <rect key="frame" x="20" y="471" width="86" height="21"/>
+                                <rect key="frame" x="20" y="514" width="86" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -263,7 +262,6 @@
         <class className="CreatePostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CreatePostViewController.h"/>
             <relationships>
-                <relationship kind="action" name="changeAnonymousSwitch:" candidateClass="UISwitch"/>
                 <relationship kind="action" name="pressCancel:"/>
                 <relationship kind="action" name="pressSave:"/>
                 <relationship kind="outlet" name="postAnon" candidateClass="UISwitch"/>

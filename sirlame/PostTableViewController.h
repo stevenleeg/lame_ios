@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CreatePostViewController.h"
 
-@interface PostTableViewController : UITableViewController <CreatePostViewControllerDelegate>
+@interface PostTableViewController : UITableViewController <CreatePostViewControllerDelegate> {
+    NSMutableDictionary *rowHeights;
+    int currentlySelectedIndexPath;
+}
 
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -30,7 +30,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -41,6 +40,9 @@
     
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = delegate.managedObjectContext;
+    
+    rowHeights = [[NSMutableDictionary alloc] init];
+    currentlySelectedIndexPath = -1;
     
     // UI customization
     [self checkLogoutAnimated: NO];
@@ -84,13 +86,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [posts count] * 2;
 }
 
@@ -126,6 +126,11 @@
     backgroundView.backgroundColor = [SLColors white];
     cell.backgroundView = backgroundView;
     
+    // Set the selectedBackgroundView
+    UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.frame];
+    selectedBackgroundView.backgroundColor = [SLColors tan];
+    cell.selectedBackgroundView = selectedBackgroundView;
+    
     return cell;
 }
 
@@ -136,31 +141,44 @@
         return 10;
     }
     
+    // Check the cache
+    NSString *cacheKey = [NSString stringWithFormat:@"%d", indexPath.row];
+    NSNumber *height = [rowHeights objectForKey:cacheKey];
+    if(height != nil) {
+        return [height integerValue];
+    }
+    
     // Otherwise, let's size it relative to the content of the textView
     Post *post = [self.posts objectAtIndex:indexPath.row / 2];
     CGSize size = [post.content sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.tableView.frame.size.width - 20, 1000.0)];
+    height = [NSNumber numberWithInt: size.height + 32];
+    
+    [rowHeights setObject:height forKey:cacheKey];
+    
     return size.height + 32;
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[segue identifier] isEqualToString:@"showPostDetails"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        PostViewController *next = (PostViewController*)segue.destinationViewController;
-        
-        Post *post = [self.posts objectAtIndex: indexPath.row / 2];
-        next.post = post;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    int addToHeight = 30;
+    if(currentlySelectedIndexPath == indexPath.row) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        addToHeight = -30;
+        currentlySelectedIndexPath = -1;
+    }
+    else {
+        currentlySelectedIndexPath = indexPath.row;
+    }
+    
+    // Change the height to add the new views (the inefficiency here kills me)
+    NSString *key = [NSString stringWithFormat:@"%d", indexPath.row];
+    NSNumber *height = [rowHeights objectForKey:key];
+    height = [NSNumber numberWithInt: ([height integerValue] + addToHeight)];
+    [rowHeights setObject:height forKey:key];
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
+    
 }
 
 -(void)savedPost
