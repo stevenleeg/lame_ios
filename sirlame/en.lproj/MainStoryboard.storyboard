@@ -99,13 +99,6 @@
                                     <rect key="frame" x="10" y="1" width="300" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Hello world" id="miv-DO-E6b">
-                                            <rect key="frame" x="0.0" y="16" width="300" height="38"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="posted by steve" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MU2-xD-Uht">
                                             <rect key="frame" x="9" y="5" width="85" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
@@ -113,12 +106,17 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
+                                        <webView userInteractionEnabled="NO" contentMode="scaleToFill" id="1eS-b6-BhC">
+                                            <rect key="frame" x="0.0" y="23" width="300" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.065008229039698162" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </webView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="postContent" destination="miv-DO-E6b" id="VQQ-qA-E0w"/>
+                                    <outlet property="postContent" destination="1eS-b6-BhC" id="oKP-dZ-K8R"/>
                                     <outlet property="postedBy" destination="MU2-xD-Uht" id="bPG-5a-sAK"/>
                                     <segue destination="XcF-jL-Eu0" kind="push" identifier="showPostDetails" id="Uay-gZ-NFO"/>
                                 </connections>
@@ -286,7 +284,7 @@
         <class className="PostTableCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PostTableCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="postContent" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="postContent" candidateClass="UIWebView"/>
                 <relationship kind="outlet" name="postedBy" candidateClass="UILabel"/>
             </relationships>
         </class>

@@ -119,7 +119,6 @@
         [cell setAuthor:@"anonymous"];
     }
     [cell setContent:post.content];
-    cell.postContent.scrollEnabled = NO;
     
     // Do some styling
     CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];

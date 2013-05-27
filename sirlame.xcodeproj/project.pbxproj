@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B7BEB9F0FD041A4A43058F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB259E542B2473F8DF623F8 /* libPods.a */; };
+		AA31C06D1752DF87009D73D5 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = AA31C06C1752DF87009D73D5 /* style.css */; };
 		AA41AB5E175012420032DBD3 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = AA41AB5D175012420032DBD3 /* 37x-Checkmark.png */; };
 		AA41AB60175012460032DBD3 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA41AB5F175012460032DBD3 /* 37x-Checkmark@2x.png */; };
 		AA41AB651750337B0032DBD3 /* SLColors.m in Sources */ = {isa = PBXBuildFile; fileRef = AA41AB641750337B0032DBD3 /* SLColors.m */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA31C06C1752DF87009D73D5 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		AA41AB5D175012420032DBD3 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		AA41AB5F175012460032DBD3 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		AA41AB631750337B0032DBD3 /* SLColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLColors.h; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				AA41AB641750337B0032DBD3 /* SLColors.m */,
 				AA41AB66175057110032DBD3 /* PostTableCell.h */,
 				AA41AB67175057110032DBD3 /* PostTableCell.m */,
+				AA31C06C1752DF87009D73D5 /* style.css */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				AADD843D174849A7009BB57E /* MainStoryboard.storyboard in Resources */,
 				AA41AB5E175012420032DBD3 /* 37x-Checkmark.png in Resources */,
 				AA41AB60175012460032DBD3 /* 37x-Checkmark@2x.png in Resources */,
+				AA31C06D1752DF87009D73D5 /* style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

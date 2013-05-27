@@ -10,8 +10,9 @@
 
 @interface PostTableCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UITextView *postContent;
+@property (strong, nonatomic) IBOutlet UIWebView *postContent;
 @property (strong, nonatomic) IBOutlet UILabel *postedBy;
+@property (strong, nonatomic) NSString *postText;
 
 -(void)setContent:(NSString*)content;
 -(void)setAuthor:(NSString*)author;

@@ -13,6 +13,7 @@
 @implementation PostTableCell
 @synthesize postContent;
 @synthesize postedBy;
+@synthesize postText;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -31,7 +32,16 @@
 
 -(void)setContent:(NSString*)content
 {
-    self.postContent.text = content;
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:path];
+    
+    content = [NSString stringWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />"
+        "%@", content];
+    
+    [self.postContent loadHTMLString:content baseURL:baseURL];
+    self.postContent.backgroundColor = [UIColor clearColor];
+    self.postContent.opaque = NO;
+    self.postText = content;
 }
 
 -(void)setAuthor:(NSString *)author
@@ -42,7 +52,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGSize size = [self.postContent.text sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.superview.frame.size.width - 20, 1000.0)];
+    CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.superview.frame.size.width - 20, 1000.0)];
     CGRect frame = self.postContent.frame;
     frame.size.height = size.height + 15;
     self.postContent.frame = frame;
