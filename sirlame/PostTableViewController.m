@@ -101,6 +101,9 @@
     
     if(indexPath.row % 2 == 1) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpacingCellIdentifier forIndexPath:indexPath];
+        if(cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpacingCellIdentifier];
+        }
         CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
         UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
         backgroundView.backgroundColor = [SLColors background];
@@ -110,6 +113,9 @@
     }
     
     PostTableCell *cell = [tableView dequeueReusableCellWithIdentifier:NormalCellIdentifier forIndexPath:indexPath];
+    if(cell == nil) {
+        cell = [[PostTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NormalCellIdentifier];
+    }
     
     Post *post = [self.posts objectAtIndex:indexPath.row / 2];
     if(post.author != nil) {
@@ -120,7 +126,7 @@
     }
     [cell setContent:post.content];
     
-    // Do some styling
+    // Set the regular background
     CGRect rect = [self.tableView rectForRowAtIndexPath:indexPath];
     UIView *backgroundView = [[UIView alloc] initWithFrame:rect];
     backgroundView.backgroundColor = [SLColors white];

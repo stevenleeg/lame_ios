@@ -44,25 +44,48 @@
         "%@", content];
     
     [self.postContent loadHTMLString:content baseURL:baseURL];
+    [self.postContent setDelegate: self];
     self.postContent.backgroundColor = [UIColor clearColor];
     self.postContent.opaque = NO;
     self.postText = content;
 }
 
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize size = [webView sizeThatFits:CGSizeZero];
+    frame.size = size;
+    frame.size.height += 5;
+    webView.frame = frame;
+    
+    //NSLog(@"Got a fit! %f, %f", frame.size.width, frame.size.height);
+}
+
 -(void)setAuthor:(NSString *)author
 {
     self.postedBy.text = [NSString stringWithFormat:@"posted by %@", author];
+    [self.postedBy sizeToFit];
 }
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.superview.frame.size.width - 20, 1000.0)];
+    /*
+    CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(self.frame.size.width, 1000.0)];
     CGRect frame = self.postContent.frame;
-    frame.size.height = size.height + 15;
+    frame.size.height = size.height + 5;
     self.postContent.frame = frame;
+    */
     
     [self.postedBy sizeToFit];
+    
+    /*
+    // Position the view post button
+    CGRect btnFrame = self.viewPostButton.frame;
+    self.viewPostButton.frame = CGRectMake(btnFrame.origin.x, frame.origin.y + frame.size.height + 10, btnFrame.size.width, btnFrame.size.height);
+    */
 }
 
 @end

@@ -111,6 +111,18 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="0.065008229039698162" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </webView>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QSc-QZ-aXY">
+                                            <rect key="frame" x="9" y="64" width="89" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                            <state key="normal" title="view post">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -118,6 +130,7 @@
                                 <connections>
                                     <outlet property="postContent" destination="1eS-b6-BhC" id="oKP-dZ-K8R"/>
                                     <outlet property="postedBy" destination="MU2-xD-Uht" id="bPG-5a-sAK"/>
+                                    <outlet property="viewPostButton" destination="QSc-QZ-aXY" id="ghf-7m-N3l"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpacingCell" id="sMm-fB-BA3">
@@ -262,6 +275,7 @@
         <class className="CreatePostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CreatePostViewController.h"/>
             <relationships>
+                <relationship kind="action" name="changeAnonymousSwitch:" candidateClass="UISwitch"/>
                 <relationship kind="action" name="pressCancel:"/>
                 <relationship kind="action" name="pressSave:"/>
                 <relationship kind="outlet" name="postAnon" candidateClass="UISwitch"/>
@@ -284,6 +298,7 @@
             <relationships>
                 <relationship kind="outlet" name="postContent" candidateClass="UIWebView"/>
                 <relationship kind="outlet" name="postedBy" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewPostButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="PostTableViewController" superclassName="UITableViewController">

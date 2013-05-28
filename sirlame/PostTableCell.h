@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PostTableCell : UITableViewCell
+@interface PostTableCell : UITableViewCell <UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *postContent;
 @property (strong, nonatomic) IBOutlet UILabel *postedBy;
+@property (strong, nonatomic) IBOutlet UIButton *viewPostButton;
 @property (strong, nonatomic) NSString *postText;
 
 -(void)setContent:(NSString*)content;
