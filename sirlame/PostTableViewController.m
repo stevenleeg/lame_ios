@@ -204,6 +204,10 @@
 
 -(void)pushViewPost
 {
+    // Reset the height of that cell
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"viewPost" sender:self];
 }
 
