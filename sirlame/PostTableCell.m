@@ -8,12 +8,14 @@
 
 #import "PostTableCell.h"
 #import "SLColors.h"
+#import "PostTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation PostTableCell
 @synthesize postContent;
 @synthesize postedBy;
 @synthesize postText;
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,13 +23,6 @@
     if (self) {
     }
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)setContent:(NSString*)content
@@ -60,13 +55,32 @@
     frame.size.height += 5;
     webView.frame = frame;
     
-    //NSLog(@"Got a fit! %f, %f", frame.size.width, frame.size.height);
+    // Now setup the buttons
+    frame = CGRectMake(frame.origin.x + 9, frame.origin.y + frame.size.height, self.viewPostButton.frame.size.width, self.viewPostButton.frame.size.height);
+    self.viewPostButton.frame = frame;
+}
+
+-(IBAction)pushViewPost:(id)sender
+{
+    [self.delegate pushViewPost];
 }
 
 -(void)setAuthor:(NSString *)author
 {
     self.postedBy.text = [NSString stringWithFormat:@"posted by %@", author];
     [self.postedBy sizeToFit];
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    if(self.selected == selected) return;
+    [super setSelected:selected animated:animated];
+    
+    if(selected) {
+        self.viewPostButton.alpha = 1;
+    } else {
+        self.viewPostButton.alpha = 0;
+    }
 }
 
 -(void)layoutSubviews

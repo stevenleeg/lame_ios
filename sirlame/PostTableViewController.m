@@ -42,7 +42,6 @@
     self.managedObjectContext = delegate.managedObjectContext;
     
     rowHeights = [[NSMutableDictionary alloc] init];
-    currentlySelectedIndexPath = -1;
     
     // UI customization
     [self checkLogoutAnimated: NO];
@@ -137,6 +136,9 @@
     selectedBackgroundView.backgroundColor = [SLColors tan];
     cell.selectedBackgroundView = selectedBackgroundView;
     
+    cell.viewPostButton.alpha = 0;
+    cell.delegate = self;
+    
     return cell;
 }
 
@@ -166,25 +168,43 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int addToHeight = 30;
-    if(currentlySelectedIndexPath == indexPath.row) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        addToHeight = -30;
-        currentlySelectedIndexPath = -1;
+    if(currentlySelectedIndexPath != nil) {
+        [tableView deselectRowAtIndexPath:currentlySelectedIndexPath animated:YES];
+        NSString *key = [NSString stringWithFormat:@"%d", currentlySelectedIndexPath.row];
+        NSNumber *height = [rowHeights objectForKey:key];
+        height = [NSNumber numberWithInt: ([height integerValue] - 30)];
+        [rowHeights setObject:height forKey:key];
     }
-    else {
-        currentlySelectedIndexPath = indexPath.row;
+    if([currentlySelectedIndexPath isEqual:indexPath]) {
+        currentlySelectedIndexPath = nil;
+        [tableView beginUpdates];
+        [tableView endUpdates];
+        return;
     }
+    currentlySelectedIndexPath = indexPath;
     
     // Change the height to add the new views (the inefficiency here kills me)
     NSString *key = [NSString stringWithFormat:@"%d", indexPath.row];
     NSNumber *height = [rowHeights objectForKey:key];
-    height = [NSNumber numberWithInt: ([height integerValue] + addToHeight)];
+    height = [NSNumber numberWithInt: ([height integerValue] + 30)];
     [rowHeights setObject:height forKey:key];
     
     [tableView beginUpdates];
     [tableView endUpdates];
-    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"viewPost"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        PostViewController *postView = [segue destinationViewController];
+        postView.post = [self.posts objectAtIndex:indexPath.row / 2];
+    }
+}
+
+-(void)pushViewPost
+{
+    [self performSegueWithIdentifier:@"viewPost" sender:self];
 }
 
 -(void)savedPost
