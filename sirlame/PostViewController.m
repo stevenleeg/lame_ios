@@ -33,7 +33,12 @@
 {
     [super viewDidLoad];
     
-    self.postedBy.text = [NSString stringWithFormat:@"Posted by: %@", self.post.author.name];
+    if(self.post.author != nil) {
+        self.postedBy.text = [NSString stringWithFormat:@"posted by: %@", self.post.author.name];
+    }
+    else {
+        self.postedBy.text = [NSString stringWithFormat:@"posted by: anonymous"];
+    }
     self.postContent.text = self.post.content;
 }
 
